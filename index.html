@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <header>
+        <img src="assets/logo.png" alt="logo">
+        <nav>
+            <ul>
+                <li>
+                    <a href="#allRecipes">Всички рецепти</a>
+                </li>
+                <li>
+                    <a href="#favouriteRecepies">Любими рецепти</a>
+                </li>
+                <li>
+                    <a href="#createRecipe">Създай рецепта</a>
+                </li>
+                <li>
+                    <a href="#myProfile">Моят профил</a>
+                </li>
+            </ul>
+        </nav>
+        <img id="profilePicture" src="assets/guest.png" alt="profile-img">
+    </header>
+    <nav id="header-nav">
+        Търси по име:
+        <input type="text" id="search">
+    </nav>
+    <main>
+        <div id="allRecipes">
+
+        </div>
+
+        <div id="favouriteRecepies">
+            <h1>Fav</h1>
+        </div>
+
+        <div id="createRecipe">
+            <form>
+                <label for="title">Наименование</label>
+                <input type="text" name="title" id="title" required>
+
+                <label for="ingredients">Състваки</label>
+                <textarea name="ingredients" id="ingredients" cols="30" rows="5" required></textarea>
+
+                <label for="href">Линк към подробна рецепта</label>
+                <input type="text" id="href" required>
+
+                <label for="thumbnail">Снимка</label>
+                <input type="text" id="thumbnail" required>
+
+                <button id="create">Създай</button>
+            </form>
+        </div>
+
+        <div id="myProfile">
+            <form>
+                <span>
+                    <label for="name">Име:</label>
+                    <input type="text" name="name" id="name">
+                </span>
+                <span>
+                    <label for="name">Години:</label>
+                    <input type="number" name="age" id="age">
+                </span>
+                <span>                  
+                    <label for="name">Адрес:</label>
+                    <input type="text" name="address" id="address">
+                </span>
+                <span>
+                    <label for="name">Профилна снимка:</label>
+                    <input type="text" name="profileImg" id="profileImg">
+                </span>
+                <button id="submit">Submit</button>
+            </form>
+
+            <table id="myProfileTable">
+
+
+            </table>
+        </div>
+
+        <div id="errorPage">
+            <h1>Error</h1>
+        </div>
+    </main>
+    <footer>
+        <h3>Website created by: Mirela Metodieva.</h3>
+        <h3>Alrights reserved &copy; 2021</h3>
+    </footer>
+
+    <script src="assets/js/recipesData.js" defer></script>
+    <script src="assets/js/Recipe.js" defer></script>
+    <script src="assets/js/Recipes.js" defer></script>
+    <script src="assets/js/User.js" defer></script>
+    <script src="assets/js/index.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,175 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    color: black;
+}
+
+header {
+    background-color: #fdc48d;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+header img {
+    width: 50px;
+}
+
+header nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    list-style: none;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: inherit;
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 25%;
+}
+
+header nav ul li a:hover {
+    background-color: #ae2c30;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+}
+
+#header-nav {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.card {
+    border-radius: 5px;
+    border: 1px solid gray;
+    width: 250px;
+    text-align: center;
+}
+
+.card div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 5px;
+    padding-bottom: 10px;
+}
+
+.card div p {
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.card div span {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card div span button {
+    background-color: #f29840;
+    border-radius: 10px;
+    border: none;
+    padding: 5px 10px;
+}
+
+.card div span button:hover {
+    background-color: #9e5c19;
+    cursor: pointer;
+    color: white;
+}
+
+.card img {
+    width: 250px;
+}
+
+#profilePicture {
+    border-radius: 50%;
+}
+
+#allRecipes,
+#favouriteRecepies {
+    padding: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+#myProfile {
+    background-color: rgba(53, 53, 53, 0.397);
+    width: 60%;
+    margin: auto;
+    min-height: 74vh;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+#myProfile form {
+    width: 60%;
+    margin: auto;
+    background-color: rgba(53, 53, 53, 0.397);
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#myProfileTable {
+    margin: auto;
+    width: 15%;
+}
+
+#myProfileTable td {
+    border: 2px solid white;
+}
+
+#submit {
+    width: 150px;
+    padding: 10px;
+    margin: auto;
+}
+
+#createRecipe {
+    min-height: 84.5vh;
+}
+
+#createRecipe form {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    margin: auto;
+}
+
+#createRecipe form button {
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #f29840;
+}
+
+footer {
+    background-color: #f29840;
+    text-align: center;
+}
+
+footer h3 {
+    padding: 10px 0;
+}
