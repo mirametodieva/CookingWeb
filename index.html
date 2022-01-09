@@ -6,44 +6,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
     <header>
-        <img src="assets/logo.png" alt="logo">
+        <a href="#allRecipes"><img src="assets/soup.png" alt="logo"></a>
         <nav>
             <ul>
                 <li>
-                    <a href="#allRecipes">Всички рецепти</a>
+                    <a href="#allRecipes"> <img src="assets/cook-book.png" alt="all-recipes"> Всички рецепти</a>
                 </li>
                 <li>
-                    <a href="#favouriteRecepies">Любими рецепти</a>
+                    <a href="#favouriteRecepies"> <img src="assets/social-media.png" alt="fav-recipes"> Любими рецепти</a>
                 </li>
                 <li>
-                    <a href="#createRecipe">Създай рецепта</a>
+                    <a href="#createRecipe"> <img src="assets/notebook.png" alt="create-recipe"> Създай рецепта</a>
                 </li>
                 <li>
-                    <a href="#myProfile">Моят профил</a>
+                    <a href="#myProfile"> <img src="assets/woman.png" alt="profile"> Моят профил</a>
                 </li>
             </ul>
         </nav>
-        <img id="profilePicture" src="assets/guest.png" alt="profile-img">
+        <a href="#myProfile"><img id="profilePicture" src="assets/woman.png" alt="profile-img"></a>
     </header>
-    <nav id="header-nav">
-        Търси по име:
-        <input type="text" id="search">
-    </nav>
-    <main>
-        <div id="allRecipes">
 
+    <main>
+        <div id="home">
+            <nav id="header-nav">
+                Търси по име:
+                <input type="text" id="search">
+                <img src="assets/search.png" alt="search-img">
+            </nav>
+            <div id="allRecipes">
+            </div>
         </div>
 
-        <div id="favouriteRecepies">
-            <h1>Fav</h1>
+        <div id="favPage">
+            <span class="my-fav-span">
+                <h1>Твойте любими рецепти! </h1>
+                <img src="assets/social-media.png" alt="Recipe">
+            </span>
+
+            <div id="favouriteRecepies">
+            </div>
         </div>
 
         <div id="createRecipe">
+            <span class="my-fav-span">
+                <h1>Покажи ни твоята рецепта! Създай я бързо и лесно!</h1>
+                <img src="assets/notebook.png" alt="Recipe">
+            </span>
             <form>
                 <label for="title">Наименование</label>
                 <input type="text" name="title" id="title" required>
@@ -62,6 +79,10 @@
         </div>
 
         <div id="myProfile">
+            <span class="my-fav-span">
+                <h1>Все още нямаш профил? Регистрирай се напълно безплатно и стани най-добрият готвач!</h1>
+                <img src="assets/cooking.png" alt="cook">
+            </span>
             <form>
                 <span>
                     <label for="name">Име:</label>
@@ -93,8 +114,7 @@
         </div>
     </main>
     <footer>
-        <h3>Website created by: Mirela Metodieva.</h3>
-        <h3>Alrights reserved &copy; 2021</h3>
+        <h3>Website created by: Mirela Metodieva.Alrights reserved &copy; 2021</h3>
     </footer>
 
     <script src="assets/js/recipesData.js" defer></script>

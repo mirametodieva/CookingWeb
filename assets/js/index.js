@@ -1,6 +1,8 @@
 (function() {
 
     const allRecipesPage = document.getElementById("allRecipes");
+    const homePage = document.getElementById("home");
+    const favPage = document.getElementById("favPage");
     const favouriteRecepiesPage = document.getElementById("favouriteRecepies");
     const createRecipePage = document.getElementById("createRecipe");
     const myProfilePage = document.getElementById("myProfile");
@@ -32,46 +34,46 @@
 
         switch (hash) {
             case "":
-                allRecipesPage.style.display = "flex";
-                favouriteRecepiesPage.style.display = "none";
+                homePage.style.display = "flex";
+                favPage.style.display = "none";
                 createRecipePage.style.display = "none";
                 myProfilePage.style.display = "none";
                 errorPage.style.display = "none";
                 break;
             case "allRecipes":
-                allRecipesPage.style.display = "flex";
-                favouriteRecepiesPage.style.display = "none";
+                homePage.style.display = "flex";
+                favPage.style.display = "none";
                 createRecipePage.style.display = "none";
                 myProfilePage.style.display = "none";
                 errorPage.style.display = "none";
                 printRecipes(recipes, allRecipesPage);
                 break;
             case "favouriteRecepies":
-                allRecipesPage.style.display = "none";
-                favouriteRecepiesPage.style.display = "flex";
+                homePage.style.display = "none";
+                favPage.style.display = "flex";
                 createRecipePage.style.display = "none";
                 myProfilePage.style.display = "none";
                 errorPage.style.display = "none";
                 printRecipes(user.favourite, favouriteRecepiesPage);
                 break;
             case "createRecipe":
-                allRecipesPage.style.display = "none";
-                favouriteRecepiesPage.style.display = "none";
+                homePage.style.display = "none";
+                favPage.style.display = "none";
                 createRecipePage.style.display = "flex";
                 myProfilePage.style.display = "none";
                 errorPage.style.display = "none";
                 break;
             case "myProfile":
-                allRecipesPage.style.display = "none";
-                favouriteRecepiesPage.style.display = "none";
+                homePage.style.display = "none";
+                favPage.style.display = "none";
                 createRecipePage.style.display = "none";
                 myProfilePage.style.display = "flex";
                 errorPage.style.display = "none";
                 showCookedPecipe(user.cooked, myProfileTable);
                 break;
             default:
-                allRecipesPage.style.display = "none";
-                favouriteRecepiesPage.style.display = "none";
+                homePage.style.display = "none";
+                favPage.style.display = "none";
                 createRecipePage.style.display = "none";
                 myProfilePage.style.display = "none";
                 errorPage.style.display = "flex";
@@ -89,7 +91,7 @@
         let address = document.getElementById("address");
         let profileImg = document.getElementById("profileImg");
         if (profileImg.value == 0) {
-            profileImg.value = "assets/guest.png"
+            profileImg.value = "assets/woman.png";
         }
         let user = new User(name.value, age.value,
             address.value, profileImg.value);
@@ -137,9 +139,9 @@
             let span = document.createElement("span");
             let buttonAdd = document.createElement("button");
             if (user.isFavourite(recipe)) {
-                buttonAdd.innerHTML = "Премахни от любими";
+                buttonAdd.innerHTML = "<img src=\"https://img.icons8.com/ios-filled/20/ff0000/like--v1.png\"/>Премахни от любими";
             } else {
-                buttonAdd.innerHTML = "Добави в любими";
+                buttonAdd.innerHTML = "<img src=\"https://img.icons8.com/ios/20/000000/like--v1.png\"/> Добави в любими";
             }
             buttonAdd.addEventListener("click", function() {
                 user.addFavourite(recipe);

@@ -5,6 +5,11 @@
 
 body {
     color: black;
+    font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+    font-family: 'Marck Script', cursive;
 }
 
 header {
@@ -14,11 +19,11 @@ header {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    padding: 0 20px;
+    padding: 5px 20px;
 }
 
 header img {
-    width: 50px;
+    width: 60px;
 }
 
 header nav ul {
@@ -31,24 +36,41 @@ header nav ul {
 header nav ul li a {
     text-decoration: none;
     color: inherit;
-    padding: 10px 20px;
-    border: 2px solid black;
-    border-radius: 25%;
+    border-right: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+}
+
+header nav ul li a img {
+    width: 35px;
 }
 
 header nav ul li a:hover {
     background-color: #ae2c30;
     color: white;
-    border: none;
-    padding: 12px 22px;
 }
 
 #header-nav {
     display: flex;
     padding: 20px;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 10px;
+    font-size: 1.2em;
+}
+
+#header-nav img {
+    width: 25px;
+}
+
+#home {
+    display: flex;
+    flex-direction: column;
 }
 
 .card {
@@ -56,13 +78,18 @@ header nav ul li a:hover {
     border: 1px solid gray;
     width: 250px;
     text-align: center;
+    height: auto;
+}
+
+.card img {
+    width: 250px;
 }
 
 .card div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 20px;
     padding: 5px;
     padding-bottom: 10px;
@@ -86,20 +113,23 @@ header nav ul li a:hover {
     border-radius: 10px;
     border: none;
     padding: 5px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 }
 
-.card div span button:hover {
-    background-color: #9e5c19;
+.card div span button img {
+    width: 20px;
+    height: 20px;
+}
+
+.card div span button:hover,
+#createRecipe form button:hover {
+    background-color: #dd6f01;
     cursor: pointer;
     color: white;
-}
-
-.card img {
-    width: 250px;
-}
-
-#profilePicture {
-    border-radius: 50%;
 }
 
 #allRecipes,
@@ -111,11 +141,30 @@ header nav ul li a:hover {
     gap: 20px;
 }
 
+#favPage {
+    padding: 20px;
+    min-height: 79.2vh;
+    background-color: rgba(198, 245, 178, 0.815);
+    display: flex;
+    flex-direction: column;
+}
+
+.my-fav-span {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.my-fav-span img {
+    height: 80px;
+}
+
 #myProfile {
-    background-color: rgba(53, 53, 53, 0.397);
-    width: 60%;
+    background-color: rgba(211, 177, 177, 0.815);
     margin: auto;
-    min-height: 74vh;
+    min-height: 71.3vh;
     padding: 50px;
     display: flex;
     flex-direction: column;
@@ -123,8 +172,11 @@ header nav ul li a:hover {
     gap: 50px;
 }
 
+#myProfile h1 {
+    text-align: center;
+}
+
 #myProfile form {
-    width: 60%;
     margin: auto;
     background-color: rgba(53, 53, 53, 0.397);
     padding: 50px;
@@ -138,6 +190,10 @@ header nav ul li a:hover {
     width: 15%;
 }
 
+#myProfileTable img {
+    height: 150px;
+}
+
 #myProfileTable td {
     border: 2px solid white;
 }
@@ -149,7 +205,13 @@ header nav ul li a:hover {
 }
 
 #createRecipe {
-    min-height: 84.5vh;
+    min-height: 84.6vh;
+    background-color: rgb(199, 204, 226);
+}
+
+#createRecipe span {
+    width: 35%;
+    margin: auto;
 }
 
 #createRecipe form {
