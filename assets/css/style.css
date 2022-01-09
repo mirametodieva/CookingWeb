@@ -59,13 +59,27 @@ header nav ul li a:hover {
     padding: 20px;
     flex-direction: row;
     align-items: center;
+    justify-content: space-around;
+}
+
+#header-nav span img {
+    width: 25px;
+    cursor: pointer;
+}
+
+#header-nav span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: center;
     gap: 10px;
     font-size: 1.2em;
 }
 
-#header-nav img {
-    width: 25px;
+#header-nav span select,
+#header-nav span input {
+    font-size: 0.8em;
+    font-family: inherit;
 }
 
 #home {
@@ -125,9 +139,8 @@ header nav ul li a:hover {
     height: 20px;
 }
 
-.card div span button:hover,
-#createRecipe form button:hover {
-    background-color: #dd6f01;
+button:hover {
+    background-color: #dd6f01 !important;
     cursor: pointer;
     color: white;
 }
@@ -199,9 +212,12 @@ header nav ul li a:hover {
 }
 
 #submit {
-    width: 150px;
+    width: 200px;
     padding: 10px;
     margin: auto;
+    font-family: 'Marck Script', cursive;
+    font-size: 1.2em;
+    background-color: #f29840;
 }
 
 #createRecipe {
@@ -221,10 +237,16 @@ header nav ul li a:hover {
     margin: auto;
 }
 
+#createRecipe form label {
+    font-size: 1.1em;
+}
+
 #createRecipe form button {
     margin-top: 30px;
     padding: 10px;
     background-color: #f29840;
+    font-family: 'Marck Script', cursive;
+    font-size: 1.5em;
 }
 
 footer {

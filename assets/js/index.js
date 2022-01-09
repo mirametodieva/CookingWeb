@@ -218,6 +218,7 @@
         if (typeof(text) === "string" && text.trim().length > 0) {
             let filtered = [];
             text = text.toLowerCase();
+
             for (let i = 0; i < recipes.length; i++) {
                 let recipe = recipes[i];
                 if (recipe.title.toLowerCase().includes(text)) {
@@ -226,8 +227,38 @@
             }
             return filtered;
         }
-
     }
 
+    let ingredientsBox = document.getElementById("ingredients");
 
+    function fillIngredientsOptions(recipes) {
+        const ingredients = new Set();
+        let allingre = recipes.map(e => e.ingredients.trim().split(","));
+        for (let i = 0; i < allingre.length; i++) {
+            for (let j = 0; j < allingre[i].length; j++) {
+                ingredients.add(allingre[i][j]);
+            }
+        }
+
+        ingredients.forEach(i => {
+            let option = document.createElement("option");
+            option.innerText = i;
+            ingredientsBox.appendChild(option);
+        });
+    }
+
+    fillIngredientsOptions(recipes);
+    ingredientsBox.addEventListener("change", function(e) {
+        filterByIngredients(recipes, e.target.value);
+    });
+
+    function filterByIngredients(recipes, value) {
+        let filteredByIngrediens = [];
+        recipes.map(e => {
+            if (e.ingredients.includes(value)) {
+                filteredByIngrediens.push(e);
+            }
+        });
+        printRecipes(filteredByIngrediens, allRecipesPage);
+    }
 })();
