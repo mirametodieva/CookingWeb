@@ -32,21 +32,29 @@
                 </li>
             </ul>
         </nav>
-        <a href="#myProfile"><img id="profilePicture" src="assets/woman.png" alt="profile-img"></a>
+        <a href="#myProfile" id="profilePicture"></a>
     </header>
 
     <main>
         <div id="home">
             <nav id="header-nav">
                 <span>
+                    <button id="sortBy">Сортирай по азбучен ред</button>
+                </span>
+
+                <span>
                     <h3>Търси по име:</h3>
                     <input type="text" id="search">
                     <img src="assets/search.png" alt="search-img">
                 </span>
+
                 <span>
                     <h3>Търси по съставки:</h3>
                     <select id="ingredients">
+                    </select>
                 </span>
+
+
 
                 </select>
             </nav>
@@ -91,24 +99,32 @@
                 <h1>Все още нямаш профил? Регистрирай се напълно безплатно и стани най-добрият готвач!</h1>
                 <img src="assets/cooking.png" alt="cook">
             </span>
-            <form>
-                <span>
-                    <label for="name">Име:</label>
-                    <input type="text" name="name" id="name">
-                </span>
-                <span>
-                    <label for="name">Години:</label>
-                    <input type="number" name="age" id="age">
-                </span>
-                <span>                  
-                    <label for="name">Адрес:</label>
-                    <input type="text" name="address" id="address">
-                </span>
-                <span>
-                    <label for="name">Профилна снимка:</label>
-                    <input type="text" name="profileImg" id="profileImg">
-                </span>
-                <button id="submit">Създай профил</button>
+            <form id="register">
+                <table>
+                    <tr>
+                        <td><label for="name">Име:</label></td>
+                        <td><input type="text" name="name" id="name"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="password">Парола:</label></td>
+                        <td><input type="password" name="password" id="password"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="name">Години:</label></td>
+                        <td><input type="number" name="age" id="age"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="name">Адрес:</label></td>
+                        <td> <input type="text" name="address" id="address"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="name">Профилна снимка:</label></td>
+                        <td><input type="text" name="profileImg" id="profileImg"></td>
+                    </tr>
+                </table>
+
+                <button id="submit">Регистрирай се</button>
+
             </form>
 
             <table id="myProfileTable">

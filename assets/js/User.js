@@ -1,33 +1,43 @@
 class User {
-    constructor(name, age, address, profilePicture) {
+    constructor(name, age, address, profilePicture, favourite, cooked, recipes) {
         this.name = name;
         this.age = age;
         this.address = address;
         this.profilePicture = profilePicture;
-        this.favourite = [];
-        this.cooked = [];
+        this.favourite = favourite;
+        this.cooked = cooked;
+        this.recipes = recipes;
     }
 
 
-    addFavourite(recipe) {
-        let idx = this.favourite.indexOf(recipe);
+    addFavourite(recipe, favourite) {
+        let idx = favourite.indexOf(recipe);
         if (idx === -1) {
-            this.favourite.push(recipe);
+            favourite.push(recipe);
+            recipe.isFav = true;
         } else {
-            this.favourite.splice(idx, 1);
+            favourite.splice(idx, 1);
+            recipe.isFav = false;
         }
+        let user = JSON.parse(localStorage.getItem("user"));
+        user.favourite = favourite;
+        localStorage.setItem("user", JSON.stringify(user));
     }
 
-    isFavourite(recipe) {
-        let idx = this.favourite.indexOf(recipe);
-        return idx === -1 ? false : true;
+    isFavourite(recipe, favourite) {
+        let idx = favourite.indexOf(recipe);
+        return idx != -1;
     }
-    cook(recipe) {
-        let idx = this.cooked.indexOf(recipe);
+
+    cook(recipe, cooked) {
+        let idx = cooked.indexOf(recipe);
         if (idx === -1) {
-            this.cooked.push(recipe);
+            cooked.push(recipe);
         } else {
             recipe.numberofCooked++;
         }
+        let user = JSON.parse(localStorage.getItem("user"));
+        user.cooked = cooked;
+        localStorage.setItem("user", JSON.stringify(user));
     }
 }

@@ -8,25 +8,41 @@
     const myProfilePage = document.getElementById("myProfile");
     const errorPage = document.getElementById("errorPage");
     const myProfileTable = document.getElementById("myProfileTable");
-    const user = addUserProfile();
+    let user = addUserProfile();
+    let recipes = loadRecipes();
+    console.log(user.recipes);
     let createButton = document.getElementById("create");
+    let ingredientsBox = document.getElementById("ingredients");
+    let sortByBox = document.getElementById("sortBy");
 
-    let recipes = [];
 
     document.getElementById("submit").addEventListener("click", function(e) {
         e.preventDefault();
-        addUserProfile();
+        localStorage.removeItem("user");
+        user = addUserProfile();
     })
-    for (let i = 0; i < recepiesData.length; i++) {
-        let rec = recepiesData[i];
-        let newRec = new Recipe(
-            rec.title,
-            rec.href,
-            rec.ingredients,
-            rec.thumbnail,
-            1
-        );
-        addRecipes(recipes, newRec);
+
+    function loadRecipes() {
+        if (JSON.parse(localStorage.getItem("user")).recipes.length > 0)
+            return user.recipes;
+        else {
+            let recipes = [];
+            for (let i = 0; i < recepiesData.length; i++) {
+                let rec = recepiesData[i];
+                let newRec = new Recipe(
+                    rec.title,
+                    rec.href,
+                    rec.ingredients,
+                    rec.thumbnail,
+                    1
+                );
+                addRecipes(recipes, newRec);
+            }
+            let user = JSON.parse(localStorage.getItem("user"));
+            user.recipes = recipes;
+            localStorage.setItem("user", JSON.stringify(user));
+            return recipes;
+        }
     }
 
     let hashChange = function() {
@@ -86,18 +102,29 @@
 
 
     function addUserProfile() {
+        let user;
         let name = document.getElementById("name");
         let age = document.getElementById("age");
         let address = document.getElementById("address");
         let profileImg = document.getElementById("profileImg");
-        if (profileImg.value == 0) {
-            profileImg.value = "assets/woman.png";
-        }
-        let user = new User(name.value, age.value,
-            address.value, profileImg.value);
         let profilePicture = document.getElementById("profilePicture");
-        profilePicture.src = document.getElementById("profileImg").value;
+        let img = document.createElement("img");
 
+        if (localStorage.getItem("user")) {
+
+            let newUser = JSON.parse(localStorage.getItem("user"));
+            user = new User(newUser.name, newUser.age, newUser.address, newUser.profilePicture,
+                newUser.favourite, newUser.cooked, newUser.recipes);
+            img.src = user.profilePicture == "" ? img.src = "assets/woman.png" : user.profilePicture;
+        } else {
+            user = new User(name.value, age.value, address.value, profileImg.value, [], [], []);
+            img.src = profileImg.value == 0 ? img.src = "assets/woman.png" : profileImg.value;
+            localStorage.setItem("user", JSON.stringify(user));
+            showCookedPecipe(user.cooked, myProfileTable);
+        }
+        img.alt = "profile-img";
+        profilePicture.innerHTML = "";
+        profilePicture.appendChild(img);
         name.value = "";
         age.value = "";
         address.value = "";
@@ -138,19 +165,19 @@
 
             let span = document.createElement("span");
             let buttonAdd = document.createElement("button");
-            if (user.isFavourite(recipe)) {
+            if (recipe.isFav) {
                 buttonAdd.innerHTML = "<img src=\"https://img.icons8.com/ios-filled/20/ff0000/like--v1.png\"/>Премахни от любими";
             } else {
                 buttonAdd.innerHTML = "<img src=\"https://img.icons8.com/ios/20/000000/like--v1.png\"/> Добави в любими";
             }
             buttonAdd.addEventListener("click", function() {
-                user.addFavourite(recipe);
+                user.addFavourite(recipe, user.favourite);
                 hashChange();
             })
             let buttonCook = document.createElement("button");
             buttonCook.innerHTML = "Сготви";
             buttonCook.addEventListener("click", function() {
-                user.cook(recipe);
+                user.cook(recipe, user.cooked);
                 hashChange();
             })
 
@@ -164,8 +191,6 @@
 
     function showCookedPecipe(cooked, table) {
         table.innerHTML = "";
-
-
         for (let i = 0; i < cooked.length; i++) {
             let cook = cooked[i];
             let tr = document.createElement("tr");
@@ -179,7 +204,6 @@
 
             tr.append(td1, td2);
             table.appendChild(tr);
-
         }
     }
 
@@ -204,32 +228,23 @@
     createButton.addEventListener("click", function(e) {
         e.preventDefault();
         createRecipe(recipes);
-
     });
 
     let searchBox = document.getElementById("search");
     searchBox.addEventListener("keyup", function(e) {
         let text = e.target.value;
         let filt = search(text, recipes);
-        printRecipes(filt, allRecipesPage);
+        if (filt.length)
+            printRecipes(filt, allRecipesPage);
     })
 
     function search(text, recipes) {
         if (typeof(text) === "string" && text.trim().length > 0) {
-            let filtered = [];
-            text = text.toLowerCase();
-
-            for (let i = 0; i < recipes.length; i++) {
-                let recipe = recipes[i];
-                if (recipe.title.toLowerCase().includes(text)) {
-                    filtered.push(recipe);
-                }
-            }
+            let filtered = recipes.filter(e => e.title.toLowerCase().includes(text.toLowerCase()));
             return filtered;
         }
     }
 
-    let ingredientsBox = document.getElementById("ingredients");
 
     function fillIngredientsOptions(recipes) {
         const ingredients = new Set();
@@ -253,12 +268,13 @@
     });
 
     function filterByIngredients(recipes, value) {
-        let filteredByIngrediens = [];
-        recipes.map(e => {
-            if (e.ingredients.includes(value)) {
-                filteredByIngrediens.push(e);
-            }
-        });
+        let filteredByIngrediens = recipes.filter(e => e.ingredients.includes(value));
         printRecipes(filteredByIngrediens, allRecipesPage);
     }
+
+    sortByBox.addEventListener("click", function(e) {
+        recipes.sort((e1, e2) => e1.title.toLowerCase().localeCompare(e2.title.toLowerCase()))
+        printRecipes(recipes, allRecipesPage);
+    });
+
 })();

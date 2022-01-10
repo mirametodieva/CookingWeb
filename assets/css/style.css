@@ -12,6 +12,12 @@ h1 {
     font-family: 'Marck Script', cursive;
 }
 
+button:hover {
+    background-color: #dd6f01 !important;
+    cursor: pointer;
+    color: white;
+}
+
 header {
     background-color: #fdc48d;
     display: flex;
@@ -87,6 +93,18 @@ header nav ul li a:hover {
     flex-direction: column;
 }
 
+#sortBy {
+    padding: 5px 10px;
+    background-color: #f1cbcc;
+    border-radius: 5px;
+    border: none;
+    font-size: 0.8em;
+}
+
+#sortBy:hover {
+    background-color: #a87d80 !important;
+}
+
 .card {
     border-radius: 5px;
     border: 1px solid gray;
@@ -139,12 +157,6 @@ header nav ul li a:hover {
     height: 20px;
 }
 
-button:hover {
-    background-color: #dd6f01 !important;
-    cursor: pointer;
-    color: white;
-}
-
 #allRecipes,
 #favouriteRecepies {
     padding: 50px;
@@ -189,15 +201,6 @@ button:hover {
     text-align: center;
 }
 
-#myProfile form {
-    margin: auto;
-    background-color: rgba(53, 53, 53, 0.397);
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
 #myProfileTable {
     margin: auto;
     width: 15%;
@@ -211,13 +214,23 @@ button:hover {
     border: 2px solid white;
 }
 
-#submit {
+#submit,
+#signIn button {
     width: 200px;
     padding: 10px;
     margin: auto;
     font-family: 'Marck Script', cursive;
-    font-size: 1.2em;
+    font-size: 1em;
     background-color: #f29840;
+}
+
+#myProfile form {
+    margin: auto;
+    background-color: rgba(53, 53, 53, 0.397);
+    display: flex;
+    padding: 50px;
+    gap: 20px;
+    flex-direction: column;
 }
 
 #createRecipe {
