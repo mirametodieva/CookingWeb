@@ -262,6 +262,18 @@ header nav ul li a:hover {
     font-size: 1.5em;
 }
 
+#errorPage {
+    min-height: 71.4vh;
+    background-color: red;
+    font-weight: 900;
+    font-size: 2em;
+    padding-top: 100px;
+}
+
+#errorPage h1 {
+    margin: auto;
+}
+
 footer {
     background-color: #f29840;
     text-align: center;

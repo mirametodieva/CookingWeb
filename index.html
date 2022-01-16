@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipes</title>
+    <link rel="shortcut icon" href="assets/soup.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
@@ -53,14 +54,40 @@
                     <select id="ingredients">
                     </select>
                 </span>
-
-
-
-                </select>
             </nav>
             <div id="allRecipes">
+
+                <script id="card-template" type="text/x-handlebars-template">
+                    {{#each allRecipes}}
+                    <div class="card">
+                        <a href="{{href}}" target="_blank">
+                            <img src="{{thumbnail}}" alt="recipe-{{title}}" width="200">
+                        </a>
+                        <div>
+                            <h2>{{title}}</h2>
+                            <p>{{ingredients}}</p>
+                            <span>
+                                <button class="favButton">
+                                    {{#if isFav}}
+                                        <img src="https://img.icons8.com/ios-filled/20/ff0000/like--v1.png" alt="fav">
+                                        Премахни от любими
+                                        
+                                    {{/if}}
+                                    {{#unless isFav}}
+                                        <img src="https://img.icons8.com/ios/20/000000/like--v1.png" alt="not-fav">
+                                        Добави в любими
+                                    {{/unless}}
+                                </button>
+                                <button class="cookButton">Сготви</button>
+                            </span>
+                        </div>
+                    </div>
+                    {{/each}}
+                </script>
+
             </div>
         </div>
+
 
         <div id="favPage">
             <span class="my-fav-span">
@@ -128,7 +155,20 @@
             </form>
 
             <table id="myProfileTable">
-
+                <script id="cooked-template" type="text/x-handlebars-template">
+                    {{#each cooked}}
+                    <table>
+                        <tr>
+                            <td>
+                                <img src="{{thumbnail}}" alt="picture-{{title}}">
+                            </td>
+                            <td>
+                                <h2>{{numberofCooked}}</h2>
+                            </td>
+                        </tr>
+                    </table>
+                    {{/each}}
+                </script>
 
             </table>
         </div>
@@ -138,14 +178,14 @@
         </div>
     </main>
     <footer>
-        <h3>Website created by: Mirela Metodieva.Alrights reserved &copy; 2021</h3>
+        <h3>website created by: mirela metodieva.alrights reserved &copy; 2021</h3>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="assets/js/recipesData.js" defer></script>
-    <script src="assets/js/Recipe.js" defer></script>
-    <script src="assets/js/Recipes.js" defer></script>
-    <script src="assets/js/User.js" defer></script>
-    <script src="assets/js/index.js" defer></script>
+    <script src="assets/js/RecipeModel.js" defer></script>
+    <script src="assets/js/UserModel.js" defer></script>
+    <script src="assets/js/Controller.js" defer></script>
 </body>
 
 </html>

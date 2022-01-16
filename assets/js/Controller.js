@@ -10,7 +10,6 @@
     const myProfileTable = document.getElementById("myProfileTable");
     let user = addUserProfile();
     let recipes = loadRecipes();
-    console.log(user.recipes);
     let createButton = document.getElementById("create");
     let ingredientsBox = document.getElementById("ingredients");
     let sortByBox = document.getElementById("sortBy");
@@ -30,6 +29,7 @@
             for (let i = 0; i < recepiesData.length; i++) {
                 let rec = recepiesData[i];
                 let newRec = new Recipe(
+                    rec.id,
                     rec.title,
                     rec.href,
                     rec.ingredients,
@@ -62,7 +62,7 @@
                 createRecipePage.style.display = "none";
                 myProfilePage.style.display = "none";
                 errorPage.style.display = "none";
-                printRecipes(recipes, allRecipesPage);
+                printRecipes(allRecipesPage, user.recipes);
                 break;
             case "favouriteRecepies":
                 homePage.style.display = "none";
@@ -70,7 +70,7 @@
                 createRecipePage.style.display = "none";
                 myProfilePage.style.display = "none";
                 errorPage.style.display = "none";
-                printRecipes(user.favourite, favouriteRecepiesPage);
+                printRecipes(favouriteRecepiesPage, user.favourite);
                 break;
             case "createRecipe":
                 homePage.style.display = "none";
@@ -85,7 +85,7 @@
                 createRecipePage.style.display = "none";
                 myProfilePage.style.display = "flex";
                 errorPage.style.display = "none";
-                showCookedPecipe(user.cooked, myProfileTable);
+                showCookedRecipe(user.cooked, myProfileTable);
                 break;
             default:
                 homePage.style.display = "none";
@@ -141,70 +141,35 @@
         }
     }
 
-    function printRecipes(recipes, container) {
-        container.innerHTML = "";
-        for (let i = 0; i < recipes.length; i++) {
-            let recipe = recipes[i];
+    let template = document.getElementById("card-template").innerHTML;
+    let card = Handlebars.compile(template);
 
-            let div = document.createElement("div");
-            div.classList.add("card");
+    function printRecipes(container, allRecipes) {
 
-            let a = document.createElement("a");
-            a.href = recipe.href;
-            a.target = "_blank";
-            let img = document.createElement("img");
-            img.src = recipe.thumbnail;
-            img.alt = "Снимка"
-            a.appendChild(img);
+        container.innerHTML = card({ allRecipes });
 
-            let divContent = document.createElement("div");
-            let h2 = document.createElement("h2");
-            h2.innerHTML = recipe.title;
-            let p = document.createElement("p");
-            p.innerHTML = recipe.ingredients;
+        let favButtons = document.getElementsByClassName("favButton");
+        let cookButtons = document.getElementsByClassName("cookButton");
 
-            let span = document.createElement("span");
-            let buttonAdd = document.createElement("button");
-            if (recipe.isFav) {
-                buttonAdd.innerHTML = "<img src=\"https://img.icons8.com/ios-filled/20/ff0000/like--v1.png\"/>Премахни от любими";
-            } else {
-                buttonAdd.innerHTML = "<img src=\"https://img.icons8.com/ios/20/000000/like--v1.png\"/> Добави в любими";
-            }
-            buttonAdd.addEventListener("click", function() {
-                user.addFavourite(recipe, user.favourite);
-                hashChange();
+        for (let i = 0; i < favButtons.length; i++) {
+            let favButton = favButtons[i];
+            let recepie = allRecipes[i];
+            favButton.addEventListener("click", function() {
+                user.addFavourite(recepie);
+                printRecipes(container, allRecipes);
             })
-            let buttonCook = document.createElement("button");
-            buttonCook.innerHTML = "Сготви";
-            buttonCook.addEventListener("click", function() {
-                user.cook(recipe, user.cooked);
-                hashChange();
+            let cookButton = cookButtons[i];
+            cookButton.addEventListener("click", function() {
+                user.cook(recepie);
             })
-
-            span.append(buttonAdd, buttonCook);
-
-            divContent.append(h2, p, span);
-            div.append(a, divContent);
-            container.append(div);
         }
     }
 
-    function showCookedPecipe(cooked, table) {
-        table.innerHTML = "";
-        for (let i = 0; i < cooked.length; i++) {
-            let cook = cooked[i];
-            let tr = document.createElement("tr");
-            let td1 = document.createElement("td");
-            let img = document.createElement("img");
-            img.src = cook.thumbnail;
-            img.alt = "picture";
-            td1.appendChild(img);
-            let td2 = document.createElement("td");
-            td2.innerHTML = cook.numberofCooked;
+    function showCookedRecipe(cooked, table) {
+        let templateCooked = document.getElementById("cooked-template").innerHTML;
+        let tableCooked = Handlebars.compile(templateCooked);
 
-            tr.append(td1, td2);
-            table.appendChild(tr);
-        }
+        table.innerHTML = tableCooked({ cooked });
     }
 
     function createRecipe(recipes) {
@@ -235,7 +200,7 @@
         let text = e.target.value;
         let filt = search(text, recipes);
         if (filt.length)
-            printRecipes(filt, allRecipesPage);
+            printRecipes(allRecipesPage, filt);
     })
 
     function search(text, recipes) {
@@ -269,12 +234,12 @@
 
     function filterByIngredients(recipes, value) {
         let filteredByIngrediens = recipes.filter(e => e.ingredients.includes(value));
-        printRecipes(filteredByIngrediens, allRecipesPage);
+        printRecipes(allRecipesPage, filteredByIngrediens);
     }
 
-    sortByBox.addEventListener("click", function(e) {
+    sortByBox.addEventListener("click", function() {
         recipes.sort((e1, e2) => e1.title.toLowerCase().localeCompare(e2.title.toLowerCase()))
-        printRecipes(recipes, allRecipesPage);
+        printRecipes(allRecipesPage, recipes);
     });
 
 })();
