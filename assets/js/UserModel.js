@@ -9,6 +9,18 @@ class User {
         this.recipes = recipes;
     }
 
+    removeUser() {
+        localStorage.removeItem("user");
+    }
+
+    getUser() {
+        return JSON.parse(localStorage.getItem("user"));
+    }
+
+    setUser(user) {
+        localStorage.setItem("user", JSON.stringify(user));
+    }
+
     addFavourite(recipe) {
         let idx = this.favourite.indexOf(recipe);
         if (idx === -1) {
@@ -31,6 +43,7 @@ class User {
         } else {
             recipe.numberofCooked++;
         }
+
         let user = JSON.parse(localStorage.getItem("user"));
         user.cooked = this.cooked;
         localStorage.setItem("user", JSON.stringify(user));

@@ -17,12 +17,12 @@
 
     document.getElementById("submit").addEventListener("click", function(e) {
         e.preventDefault();
-        localStorage.removeItem("user");
+        user.removeUser();
         user = addUserProfile();
     })
 
     function loadRecipes() {
-        if (JSON.parse(localStorage.getItem("user")).recipes.length > 0)
+        if (user.getUser().recipes.length > 0)
             return user.recipes;
         else {
             let recipes = [];
@@ -38,9 +38,9 @@
                 );
                 addRecipes(recipes, newRec);
             }
-            let user = JSON.parse(localStorage.getItem("user"));
-            user.recipes = recipes;
-            localStorage.setItem("user", JSON.stringify(user));
+            let user1 = user.getUser();
+            user1.recipes = recipes;
+            user.setUser(user1);
             return recipes;
         }
     }
@@ -102,7 +102,7 @@
 
 
     function addUserProfile() {
-        let user;
+        let user1 = new User();
         let name = document.getElementById("name");
         let age = document.getElementById("age");
         let address = document.getElementById("address");
@@ -110,17 +110,16 @@
         let profilePicture = document.getElementById("profilePicture");
         let img = document.createElement("img");
 
-        if (localStorage.getItem("user")) {
-
-            let newUser = JSON.parse(localStorage.getItem("user"));
-            user = new User(newUser.name, newUser.age, newUser.address, newUser.profilePicture,
+        if (user1.getUser()) {
+            let newUser = user1.getUser();
+            user1 = new User(newUser.name, newUser.age, newUser.address, newUser.profilePicture,
                 newUser.favourite, newUser.cooked, newUser.recipes);
-            img.src = user.profilePicture == "" ? img.src = "assets/woman.png" : user.profilePicture;
+            img.src = user1.profilePicture == "" ? img.src = "assets/woman.png" : user1.profilePicture;
         } else {
-            user = new User(name.value, age.value, address.value, profileImg.value, [], [], []);
+            user1 = new User(name.value, age.value, address.value, profileImg.value, [], [], []);
             img.src = profileImg.value == 0 ? img.src = "assets/woman.png" : profileImg.value;
-            localStorage.setItem("user", JSON.stringify(user));
-            showCookedPecipe(user.cooked, myProfileTable);
+            user1.setUser(user1);
+            showCookedRecipe(user1.cooked, myProfileTable);
         }
         img.alt = "profile-img";
         profilePicture.innerHTML = "";
@@ -130,7 +129,7 @@
         address.value = "";
         profileImg.value = "";
 
-        return user;
+        return user1;
     }
 
     function addRecipes(recipes, recepie) {
@@ -165,10 +164,10 @@
         }
     }
 
-    function showCookedRecipe(cooked, table) {
-        let templateCooked = document.getElementById("cooked-template").innerHTML;
-        let tableCooked = Handlebars.compile(templateCooked);
+    let templateCooked = document.getElementById("cooked-template").innerHTML;
+    let tableCooked = Handlebars.compile(templateCooked);
 
+    function showCookedRecipe(cooked, table) {
         table.innerHTML = tableCooked({ cooked });
     }
 
